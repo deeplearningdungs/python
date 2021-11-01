@@ -29,7 +29,20 @@ jobs:
          no_output_timeout: 300m
 
 workflows:
+  version: 2.1
   main:
+    jobs:
+      - build
+      - build2
+    triggers:
+      - schedule:
+          cron: "0 5,10,15,20 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                
+  alternatives:
     jobs:
       - build
       - build2
